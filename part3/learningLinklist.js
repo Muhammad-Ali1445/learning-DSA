@@ -216,7 +216,7 @@
 
 // --------------------------------------
 
-// 4.--- Return the value of given index node
+// 4.--- Reverse Linked list
 
 // class Node {
 //   constructor(val) {
@@ -262,32 +262,30 @@
 
 // 5.--- Zipper List Problem --- Merge Alternate of list 1 and list 2
 
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
 
-const a = new Node("A");
-const b = new Node("B");
-const c = new Node("C");
-const d = new Node("D");
+// const a = new Node("A");
+// const b = new Node("B");
+// const c = new Node("C");
+// const d = new Node("D");
 
-a.next = b;
-b.next = c;
-c.next = d;
+// a.next = b;
+// b.next = c;
+// c.next = d;
 
-const p = new Node("P");
-const q = new Node("Q");
-const r = new Node("R");
+// const p = new Node("P");
+// const q = new Node("Q");
+// const r = new Node("R");
 
-p.next = q;
-q.next = r;
-
+// p.next = q;
+// q.next = r;
 
 // Iterative approach
-
 // const mergeAlternate = (head1, head2) => {
 //   if (!head1) return head2;
 //   if (!head2) return head1;
@@ -330,27 +328,140 @@ q.next = r;
 // printList(mergedHead);
 
 // Recursive approach
+// const mergeAlternate = (head1, head2) => {
+//   if (head1 === null && head2 === null) return null;
+//   if (head1 === null) return head2;
+//   if (head2 === null) return head1;
 
-const mergeAlternate = (head1, head2) => {
-  if (head1 === null && head2 === null) return null;
-  if (head1 === null) return head2;
-  if (head2 === null) return head1;
+//   const next1 = head1.next;
+//   const next2 = head2.next;
+//   head1.next = head2;
+//   head2.next = mergeAlternate(next1, next2);
+//   return head1;
+// };
 
-  const next1 = head1.next;
-  const next2 = head2.next;
-  head1.next = head2;
-  head2.next = mergeAlternate(next1, next2);
-  return head1;
-};
+// const printList = (head) => {
+//   let curr = head;
+//   let result = "";
+//   while (curr !== null) {
+//     result += curr.val + " ➡ ";
+//     curr = curr.next;
+//   }
+//   console.log(result + "null");
+// };
+// const mergedHead = mergeAlternate(a, p);
+// printList(mergedHead);
 
-const printList = (head) => {
-  let curr = head;
-  let result = "";
-  while (curr !== null) {
-    result += curr.val + " ➡ ";
-    curr = curr.next;
+// Merge two lists in ascending order
+
+// const mergeAlternate = (list1, list2) => {
+//   let dummy = new ListNode(-1);
+//   let tail = dummy;
+//   while (list1 !== null && list2 !== null) {
+//     if (list1.val < list2.val) {
+//       tail.next = list1;
+//       list1 = list1.next;
+//     } else {
+//       tail.next = list2;
+//       list2 = list2.next;
+//     }
+//     tail = tail.next;
+//   }
+//   if (list1 !== null) tail.next = list1;
+//   if (list2 !== null) tail.next = list2;
+//   return dummy.next;
+// };
+
+// const printList = (head) => {
+//   let curr = head;
+//   let result = "";
+//   while (curr !== null) {
+//     result += curr.val + " ➡ ";
+//     curr = curr.next;
+//   }
+//   console.log(result + "null");
+// };
+// const mergedHead = mergeAlternate(a, p);
+// printList(mergedHead);
+
+//  Is Linked list cycle
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// const a = new Node("A");
+// const b = new Node("B");
+// const c = new Node("C");
+// const d = new Node("D");
+
+// a.next = b;
+// b.next = c;
+// c.next = d;
+// d.next = b;
+
+// function isLinkedListCycle(head) {
+//   let slow = head;
+//   let fast = head;
+
+//   while (fast !== null && fast.next !== null) {
+//     slow = slow.next;
+//     fast = fast.next.next;
+
+//     if (slow === fast) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+// console.log(isLinkedListCycle(a));
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
   }
-  console.log(result + "null");
+}
+
+const a = new Node("A");
+const b = new Node("B");
+const b1 = new Node("B");
+const a1 = new Node("A");
+
+a.next = b;
+b.next = b1;
+b1.next = a1;
+
+const reverseLinkedList = (head, prev = null) => {
+  if (head === null) return prev;
+  const next = head.next;
+  head.next = prev;
+  return reverseLinkedList(next, head);
 };
-const mergedHead = mergeAlternate(a, p);
-printList(mergedHead);
+
+const isPalindrome = (head) => {
+  if (!head || !head.next) return true;
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  let firstHalf = head;
+  let secondHalf = reverseLinkedList(slow);
+
+  while (secondHalf !== null) {
+    if (firstHalf.val !== secondHalf.val) {
+      return false;
+    }
+    firstHalf = firstHalf.next;
+    secondHalf = secondHalf.next;
+  }
+  return true;
+};
+console.log(isPalindrome(a));
