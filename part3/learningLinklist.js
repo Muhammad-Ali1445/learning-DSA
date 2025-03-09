@@ -435,6 +435,7 @@ a.next = b;
 b.next = b1;
 b1.next = a1;
 
+// reversing logic
 const reverseLinkedList = (head, prev = null) => {
   if (head === null) return prev;
   const next = head.next;
@@ -443,22 +444,25 @@ const reverseLinkedList = (head, prev = null) => {
 };
 
 const isPalindrome = (head) => {
+  // Edge Case
   if (!head || !head.next) return true;
   let slow = head;
   let fast = head;
 
+  // finding Middle Point of LinkedList
   while (fast !== null && fast.next !== null) {
     slow = slow.next;
     fast = fast.next.next;
   }
-
-  let firstHalf = head;
-  let secondHalf = reverseLinkedList(slow);
+  
+  let firstHalf = head; // First List
+  let secondHalf = reverseLinkedList(slow); // Second List
 
   while (secondHalf !== null) {
     if (firstHalf.val !== secondHalf.val) {
       return false;
     }
+    
     firstHalf = firstHalf.next;
     secondHalf = secondHalf.next;
   }
