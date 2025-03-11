@@ -88,3 +88,60 @@
 //     return missingNum;
 //   }
 //   console.log(findMissingNumber([3, 0, 1]));
+
+// ------------- Word-Pattern ---------------
+
+// var wordPattern = function (pattern, s) {
+
+//   pattern = pattern.split(" ");
+
+//   if (pattern.length !== s.length) {
+//     return false;
+//   }
+
+//   let map_patt_to_s = {};
+//   let map_s_to_patt = {};
+
+//   for (let i = 0; i < s.length; i++) {
+//     let patt_char = pattern[i];
+//     let s_char = s[i];
+
+//     if (map_patt_to_s.hasOwnProperty(patt_char)) {
+//       if (map_patt_to_s[patt_char] !== s_char) {
+//         return false;
+//       }
+//     } else {
+//       map_patt_to_s[patt_char] = s_char;
+//     }
+
+//     if (map_s_to_patt.hasOwnProperty(s_char)) {
+//       if (map_s_to_patt[s_char] !== patt_char) {
+//         return false;
+//       }
+//     } else {
+//       map_s_to_patt[s_char] = patt_char;
+//     }
+//   }
+//   return true;
+// };
+// console.log(isIsomorphic("abba", "dog cat cat dog"));
+// console.log(isIsomorphic("aaaa", "dog cat cat fish"));
+
+// -------------  Next Greater Element I ---------------
+
+function nextGreaterElement(arr1, arr2) {
+  let resultArr = [];
+  for (let i = 0; i < arr1.length; i++) {
+    let found = -1;
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j]) {
+        found=arr2.slice(j + 1).find((element) => element > arr2[j]);
+        resultArr.push(found !== undefined ? found : -1);
+        break;
+      }
+    }
+  }
+  return resultArr;
+}
+
+console.log(nextGreaterElement([4, 1, 2], [1, 3, 4, 2]));
