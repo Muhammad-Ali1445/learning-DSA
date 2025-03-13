@@ -129,13 +129,14 @@
 
 // -------------  Next Greater Element I ---------------
 
+// Brute Force Method 
 function nextGreaterElement(arr1, arr2) {
   let resultArr = [];
   for (let i = 0; i < arr1.length; i++) {
     let found = -1;
     for (let j = 0; j < arr2.length; j++) {
       if (arr1[i] === arr2[j]) {
-        found=arr2.slice(j + 1).find((element) => element > arr2[j]);
+        found = arr2.slice(j + 1).find((element) => element > arr2[j]);
         resultArr.push(found !== undefined ? found : -1);
         break;
       }
@@ -143,5 +144,21 @@ function nextGreaterElement(arr1, arr2) {
   }
   return resultArr;
 }
-
 console.log(nextGreaterElement([4, 1, 2], [1, 3, 4, 2]));
+
+// Using HashMap and stack Method 
+
+function nextGreaterElement(nums1, nums2) {
+  let map = new Map();
+  let stack = [];
+
+  for (let num of nums2) {
+    while (stack.length > 0 && stack[stack.length - 1] < num) {
+      map.set(stack.pop(), num);
+    }
+    stack.push(num);
+  }
+  return nums1.map((num) => map.get(num) ?? -1);
+}
+console.log(nextGreaterElement([4, 1, 2], [1, 3, 4, 2]));
+console.log(nextGreaterElement([2, 4], [1, 2, 3, 4]));
