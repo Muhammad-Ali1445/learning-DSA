@@ -1,26 +1,23 @@
-// print the values of node using breath first search algorithm ---- Iterative method -----
-// This problem will solve only by iterative method easily using queue . If we make its recursive
-// solution then behind the hood it will use stack that why it will create difficulty for us .
-
+// Search target using breath first search algo --- iterative method ----
 // class Node {
 //   constructor(data) {
-//     this.data = data;
+//     this.val = data;
 //     this.left = null;
 //     this.right = null;
 //   }
 // }
 
-// const breathFirstValues = (root) => {
+// const searchTargetFromTree = (root, target) => {
 //   if (root === null) return [];
-//   let result = [];
+
 //   const queue = [root];
 //   while (queue.length > 0) {
 //     const curr = queue.shift();
-//     result.push(curr.data);
+//     if (curr.data === target) return true;
 //     if (curr.left) queue.push(curr.left);
 //     if (curr.right) queue.push(curr.right);
 //   }
-//   return result;
+//   return false;
 // };
 
 // const a = new Node("a");
@@ -36,27 +33,24 @@
 // b.right = e;
 // c.right = f;
 
-// console.log(breathFirstValues(a));
+// console.log(searchTargetFromTree(a, "d"));
+// console.log(searchTargetFromTree(a, "j"));
 
 class Node {
-  constructor(data) {
-    this.data = data;
+  constructor(val) {
+    this.val = val;
     this.left = null;
     this.right = null;
   }
 }
 
-const breathFirstValues = (root, target) => {
-  if (root === null) return [];
-
-  const queue = [root];
-  while (queue.length > 0) {
-    const curr = queue.shift();
-    if (curr.data === target) return true;
-    if (curr.left) queue.push(curr.left);
-    if (curr.right) queue.push(curr.right);
-  }
-  return false;
+const searchTargetFromTree = (root, target) => {
+  if (root === null) return false;
+  if (root.val === target) return true;
+  return (
+    searchTargetFromTree(root.left, target) ||
+    searchTargetFromTree(root.right, target)
+  );
 };
 
 const a = new Node("a");
@@ -72,4 +66,5 @@ b.left = d;
 b.right = e;
 c.right = f;
 
-console.log(breathFirstValues(a, "d"));
+console.log(searchTargetFromTree(a, "d"));
+console.log(searchTargetFromTree(a, "j"));
