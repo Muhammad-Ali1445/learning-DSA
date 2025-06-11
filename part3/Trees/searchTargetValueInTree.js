@@ -36,6 +36,8 @@
 // console.log(searchTargetFromTree(a, "d"));
 // console.log(searchTargetFromTree(a, "j"));
 
+
+// Search target using depth first search algo --- resursive method ----
 class Node {
   constructor(val) {
     this.val = val;
