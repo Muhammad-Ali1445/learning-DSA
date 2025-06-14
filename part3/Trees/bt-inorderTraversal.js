@@ -1,4 +1,4 @@
-// Inorder Traversal (left ➡ Node ➡ Right) of binary Tree node values using DFS 
+// Inorder Traversal (LeftSubTree ➡ Node ➡ RightSubTree) of binary Tree node values using DFS --- leetCode ---
 
 class Node {
   constructor(val) {
@@ -8,27 +8,25 @@ class Node {
   }
 }
 
-
 // ------------ Iterative method ------------
 
 // const inorderTaversal = (root) => {
-//   let result = [];
-//   let stack = [];
+  // let result = [];
+  // let stack = [];
 
-//   let curr = root;
-//   while (curr !== null || stack.length > 0) {
-//     while (curr !== null) {
-//       stack.push(curr);
-//       curr = curr.left;
-//     }
-//      curr = stack.pop();
-//     result.push(curr.val);
+  // let curr = root;
+  // while (curr !== null || stack.length > 0) {
+  //   while (curr !== null) {
+  //     stack.push(curr);
+  //     curr = curr.left;
+  //   }
+  //    curr = stack.pop();
+  //   result.push(curr.val);
 
-//     curr = curr.right;
-//   }
-//   return result;
+  //   curr = curr.right;
+  // }
+  // return result;
 // };
-
 
 // ------------ Recursive method ------------
 
